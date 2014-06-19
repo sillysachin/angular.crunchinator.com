@@ -18,10 +18,6 @@ angular.module('crunchinatorApp.controllers', [
             main: {
                 controller: 'CrunchinatorCtrl',
                 templateUrl: 'views/main.tpl.html'
-            },
-            about: {
-                controller: 'AboutCtrl',
-                templateUrl: 'views/about.tpl.html'
             }
         },
         data:{ pageTitle: 'Crunchinator - A Cloudspace Project' }
