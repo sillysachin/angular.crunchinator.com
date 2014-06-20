@@ -28,56 +28,16 @@
         <script src="vendor/es5-shim/es5-shim.js"></script>
         <script src="vendor/json3/lib/json3.min.js"></script>
         <![endif]-->
-
-
-        <!-- Kissmetrics -->
-        <script type="text/javascript">var _kmq = _kmq || [];
-        var _kmk = _kmk || '5eac8273eff17ad825d1774c0da1f5a849cf0dda';
-        function _kms(u){
-          setTimeout(function(){
-            var d = document, f = d.getElementsByTagName('script')[0],
-            s = d.createElement('script');
-            s.type = 'text/javascript'; s.async = true; s.src = u;
-            f.parentNode.insertBefore(s, f);
-          }, 1);
-        }
-        _kms('//i.kissmetrics.com/i.js');
-        _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
-        </script>
-
     </head>
     <body>
-        <div id="fb-root"></div>
-        <script>
-            //Facebook
-            window.fbAsyncInit = function() {
-                FB.init({ appId: '505638872880080', status: true, xfbml: true });
-            };
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/all.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-
-        </script>
         <!-- Add your site or application content here -->
 
         <div id="splash" role="splash" ng-cloak ng-if="!isIE && !isMobile">
-            <a class='forkme' target='_blank' href='https://github.com/cloudspace/angular.crunchinator.com'
-                ng-click="Analytics.event('Navigation', 'Click', 'Fork me Splash');"
-            >
-                <img src='images/forkme_right_ribbon.png' alt='Fork me on GitHub' />
-            </a>
+
             <div class='initializing'>
                 <div class='header-text'>
-                    Slice, Filter &amp; Explore CrunchBase Data
+                    Slice, Filter &amp; Explore CDR Data
                 </div>
-                <video ng-if="!shared_results" preload="" width="720" height="450">
-                    <source src="data/NYConsumerWebCosShortIntro.webm" type="video/webm">
-                    <source src="data/NYConsumerWebCosShortIntro.mp4" type="video/mp4">
-                </video>
             </div>
         </div>
 
@@ -124,6 +84,12 @@
         <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="vendor/d3/d3.js"></script>
+        <!--<script src="vendor/amcharts/amstock.js"></script>-->
+        <!--<script src="vendor/amcharts/amcharts.js"></script>-->
+        <!--<script src="vendor/amcharts/pie.js"></script>-->
+        <!--<script src="vendor/amcharts/themes/light.js"></script>-->
+        <!--<script src="vendor/highcharts/highcharts-all.js"></script>-->
+
         <script src="vendor/topojson/topojson.js"></script>
         <script src="vendor/d3-cloud/d3.layout.cloud.js"></script>
         <script src="vendor/ngInfiniteScroll/ng-infinite-scroll.js"></script>
@@ -144,12 +110,12 @@
         <script src="scripts/services/investor.js"></script>
         <script src="scripts/services/fundingRound.js"></script>
         <script src="scripts/services/componentData.js"></script>
-        <script src="scripts/services/bitly.js"></script>
         <script src="scripts/services/browser.js"></script>
-        <script src="scripts/services/analytics.js"></script>
 
         <script src="scripts/controllers/crunchinator.js"></script>
         <script src="scripts/controllers/blank.js"></script>
+
+        <!--<script src="scripts/directives/crAmchartsPie.js"></script>-->
 
         <script src="scripts/directives/crD3Bar.js"></script>
         <script src="scripts/directives/crD3Pie.js"></script>
@@ -160,22 +126,8 @@
         <script src="scripts/directives/crPlaceholder.js"></script>
         <script src="scripts/directives/crWaitThenScroll.js"></script>
         <script src="scripts/directives/crAffix.js"></script>
-        <script src="scripts/directives/crFbShare.js"></script>
-        <script src="scripts/directives/crEmailShare.js"></script>
-        <script src="scripts/directives/crTwitterShare.js"></script>
         <script src="scripts/directives/crCrunchNav.js"></script>
         <script src="scripts/directives/crPopOpen.js"></script>
         <!-- endbuild -->
-
-
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-48856228-1', 'crunchinator.com');
-            ga('send', 'pageview');
-        </script>
     </body>
 </html>

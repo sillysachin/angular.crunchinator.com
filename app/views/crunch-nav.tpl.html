@@ -3,6 +3,7 @@
         <nav>
             <div class='logo'>
                 <img ng-click="reset()" src="images/logo.png"/>
+
                 <h1 ng-show="initiated && chevroned"><a href="" ng-click="reset()">Crunchinator</a></h1>
             </div>
 
@@ -14,7 +15,9 @@
                         <i class="bounce fa fa-angle-double-down"></i>
                     </div>
                 </a>
-                <div ng-show="!initiated" class="loading" >Hang tight, we're crunching your bytes (10-20 seconds)...</div>
+
+                <div ng-show="!initiated" class="loading">Hang tight, we're crunching your bytes (10-20 seconds)...
+                </div>
             </div>
 
             <div ng-show='chevroned'>
@@ -27,27 +30,17 @@
                         <li><span class="amount-count">{{investorCount || 0}}</span> Investors</li>
                     </ul>
                 </div>
+            </div>
+        </nav>
+    </div>
 
-
-                <div title='Share your results' class="share">
-                    <p>Share Results: </p>
-                    <ul>
-                        <li class="facebook"><button cr-fb-share><i class="fa fa-thumbs-up"></i>Share</button></li>
-                        <li class="twitter"><button cr-twitter-share><i class="fa fa-twitter"></i>Tweet</button></li>
-                        <li class="email"><button cr-email-share><i class="fa fa-envelope-o"></i>E-mail</button></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-        <div id="filters">
-            <ul>
-                <li ng-repeat="item in filterList">
-                    <span class="filter_type">{{item.type}}</span>
-                    <span class="filter_name">{{item.label}}</span>
-                    <a href="" class="filter_remove" ng-click="removeFilter(item)">remove</a>
-                </li>
-            </ul>
-        </div>
+    <div id="filters">
+        <ul>
+            <li ng-repeat="item in filterList">
+                <span class="filter_type">{{item.type}}</span>
+                <span class="filter_name">{{item.label}}</span>
+                <a href="" class="filter_remove" ng-click="removeFilter(item)">remove</a>
+            </li>
+        </ul>
     </div>
 </div>

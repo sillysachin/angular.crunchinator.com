@@ -1,0 +1,13 @@
+<div class='data-set-container'>
+	<div class='head'>
+        <div class="drag-handle"></div>
+		<h3>{{chartTitle}}</h3>
+		<p class="count" ng-show="{{ranges}}">
+			{{min}} - {{max}}
+		</p>
+	</div>
+	<div class='chart'>
+		<h3 class="placeholder" ng-show="placeholderText">{{placeholderText}}</h3>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</div>
+</div>
