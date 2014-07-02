@@ -56,6 +56,15 @@
             </div>
 
             <div>
+                <div cr-amcharts-pie
+                     chart-title="Company Status"
+                     data="ComponentData.dataSets.companyStatusData"
+                     selected="statuses"
+                     filter-property="statuses"
+                ><div id="companyStatusChartDiv" style="width: 100%; height: 500px;"></div></div>
+            </div>
+            <!--
+            <div>
                 <div cr-list-select
                     chart-title="Funding: Round Name"
                     items="ComponentData.dataSets.roundCodeListData"
@@ -64,6 +73,7 @@
                     filter-property="roundCodes"
                 ></div>
             </div>
+            -->
 
             <div>
                  <div cr-d3-area

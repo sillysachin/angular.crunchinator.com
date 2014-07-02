@@ -70,7 +70,6 @@ angular.module('crunchinatorApp.controllers')
 
                         $scope.initiated = true;
                         $rootScope.initiated = true;
-                        angular.element('video')[0].play();
                     }
                 });
             });
