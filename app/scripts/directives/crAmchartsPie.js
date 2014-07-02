@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootScope',
-    function($rootScope) {
+    function ($rootScope) {
         return {
             restrict: 'EA',
             replace: true,
@@ -13,7 +13,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                 config: '='
             },
             templateUrl: 'views/amcharts.tpl.html',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 scope.selectedItems = scope.$parent.filterData[scope.selected].slice(0);
                 var parent = angular.element(element[0]).parent();
                 element = angular.element(element[0]).find('.chart');
@@ -21,7 +21,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                 var width = element[0].clientWidth;
                 var height = parent.height() - 70;
                 var radius = (Math.min(width, height) / 2) - 20;
-                var color = function(slice){
+                var color = function (slice) {
                     return {
                         deadpooled: '#caeafc',
                         acquired: '#36b0f1',
@@ -29,52 +29,61 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                         alive: '#8acff7'
                     }[slice];
                 };
-                var path, ticks, labels;
+                var chart, ticks, labels;
 
                 var fill = function (d) {
-                    if(scope.selectedItems.length === 0 || _.contains(scope.selectedItems, d.data.label)) {
+                    if (scope.selectedItems.length === 0 || _.contains(scope.selectedItems, d.data.label)) {
                         return color(d.data.label);
                     } else {
                         return '#666';
                     }
                 };
 
-                window.onresize = function() {
+                window.onresize = function () {
                     scope.$apply();
                     $rootScope.$broadcast('filterAction');
                 };
 
                 var initial_load = true;
-                scope.$parent.$watch('filterData.' + scope.filterProperty, function(newval) {
+                scope.$parent.$watch('filterData.' + scope.filterProperty, function (newval) {
 
                 });
 
-                scope.$watch('data', function(data) {
-                    if(!path && data.length > 0) {
+                scope.$watch('data', function (data) {
+                    if ( !chart && data.length > 0) {
+                        var initChart = function () {
+                            var config = scope.config || {};
+                            var chartData = [];
+                            chart = new AmCharts.AmPieChart(AmCharts.themes.light);
+                            //chart = new AmCharts.AmPieChart(AmCharts.themes.patterns);
+                            chart.valueField = "count";
+                            chart.titleField = "label";
+                            chart.labelRadius = 5;
+                            chart.radius = "42%";
+                            chart.innerRadius= "60%";
+                            chart.depth3D= 10;
+                            chart.angle=15;
+                            chart.dataProvider = chartData;
+                            chart.write("companyStatusChartDiv");
+
+                            if (config.loading) {
+                                chart.showLoading();
+                            }
+
+                        };
+                        initChart();
+                        scope.render(data)
                     } else {
                         return scope.render(data);
                     }
                 }, true);
 
-                scope.$watch('config', function (config) {
-                    var chart = false;
-
-                    var initChart = function () {
-                        if (chart) chart.destroy();
-                        var config = scope.config || {};
-                        chart = new Highcharts.Chart(config);
-
-
-                        if (config.loading) {
-                            chart.showLoading();
-                        }
-
-                    };
-                    initChart();
-                });
-
-                scope.render = function(data) {
-                    if(!data || data.length === 0) { return; }
+                scope.render = function (data) {
+                    if (!data || data.length === 0) {
+                        return;
+                    }
+                    chart.dataProvider = data;
+                    chart.validateData();
                 };
             }
         };
