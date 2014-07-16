@@ -184,10 +184,10 @@ var randomDate = function(start, end) {
      * Initiate and respond with fake backend data instead of querying an actual API
      */
     var setupStubbedBackend = function() {
-        var categories = generateDataList(42, randomCategory);
-        var investors = generateDataList(9987, randomInvestor);
-        var companies = generateDataList(16635, randomCompany);
-        var rounds = generateDataList(30000, randomFundingRound);
+        var categories = generateDataList(10, randomCategory);
+        var investors = generateDataList(2500, randomInvestor);
+        var companies = generateDataList(4000, randomCompany);
+        var rounds = generateDataList(7500, randomFundingRound);
         linkGeneratedLists(companies, investors, categories, rounds);
 
         ng.module('crunchinatorApp')
