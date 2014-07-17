@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootScope',
+angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$rootScope',
     function ($rootScope) {
         return {
             restrict: 'EA',
@@ -9,7 +9,10 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                 data: '=',
                 chartTitle: '@',
                 chartId: '@',
+                extent: '@',
                 selected: '@',
+                format: '@',
+                ranges: '@',
                 filterProperty: '@',
                 config: '='
             },
@@ -18,6 +21,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                 scope.selectedItems = scope.$parent.filterData[scope.selected].slice(0);
                 var parent = angular.element(element[0]).parent();
                 element = angular.element(element[0]).find('.chart');
+                scope.format = scope.format || '%m/%Y';
 
                 var chart;
 
@@ -34,15 +38,17 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                     if (!chart && ( data && data.length > 0)) {
                         var initChart = function () {
                             var config = scope.config || {};
-                            chart = new AmCharts.AmPieChart(AmCharts.themes.light);
+                            chart = new AmCharts.AmSerialChart();
                             chart.dataProvider = [];
-                            chart.valueField = 'count';
-                            chart.titleField = 'label';
-                            chart.labelRadius = 5;
-                            chart.radius = '42%';
-                            chart.innerRadius = '60%';
-                            chart.depth3D = 10;
-                            chart.angle = 15;
+                            chart.categoryField = 'parsed_date';
+                            var categoryAxis = chart.categoryAxis;
+                            categoryAxis.parseDates = true;
+                            categoryAxis.minPeriod = 'mm';
+                            var graph = new AmCharts.AmGraph();
+                            graph.valueField = 'count';
+                            graph.type = 'smoothedLine';
+                            graph.fillAlphas = 0.8;
+                            chart.addGraph(graph);
 
                             element.append('<div style="min-width: 310px; height: 350px; margin: 0 auto" id="' + scope.chartId + '"></div>');
                             chart.write(scope.chartId);
@@ -57,6 +63,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                         return scope.render(data);
                     }
                 }, true);
+
 
                 scope.render = function (data) {
                     if (!data || data.length === 0) {
