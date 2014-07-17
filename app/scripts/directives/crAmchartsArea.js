@@ -39,11 +39,20 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                         var initChart = function () {
                             var config = scope.config || {};
                             chart = new AmCharts.AmSerialChart();
+                            chart.pathToImages = 'vendor/amcharts/images/';
                             chart.dataProvider = [];
                             chart.categoryField = 'parsed_date';
                             var categoryAxis = chart.categoryAxis;
                             categoryAxis.parseDates = true;
                             categoryAxis.minPeriod = 'mm';
+                            chart.chartScrollbar = {};
+                            var chartCursor = new AmCharts.ChartCursor();
+                            chartCursor.categoryBalloonEnabled = true;
+                            chartCursor.categoryBalloonDateFormat='JJ:NN, DD MMMM YYYY';
+                            chartCursor.cursorAlpha = 1.0;
+                            chartCursor.cursorPosition = 'mouse';
+                            chartCursor.zoomable = true;
+                            chart.addChartCursor(chartCursor);
                             var graph = new AmCharts.AmGraph();
                             graph.valueField = 'count';
                             graph.type = 'smoothedLine';
