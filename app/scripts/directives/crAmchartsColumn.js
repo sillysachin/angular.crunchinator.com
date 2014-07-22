@@ -76,6 +76,8 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsColumn', ['$ro
                             if (config.loading) {
                                 chart.showLoading();
                             }
+
+                            chart.addListener('clickGraphItem', onChartItemClick);
                         };
                         initChart();
                         scope.render(data);
@@ -84,11 +86,28 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsColumn', ['$ro
                     }
                 }, true);
 
+                function onChartItemClick(event) {
+                    var label = event.item.dataContext.label;
+                    scope.$parent.$apply(function () {
+                        if (!_.contains(scope.selectedItems, label)) {
+                            scope.selectedItems.push(label);
+                        } else {
+                            var index = scope.selectedItems.indexOf(label);
+                            scope.selectedItems.splice(index, 1);
+                        }
+                        scope.$parent.filterData[scope.selected] = scope.selectedItems.slice(0);
+                        $rootScope.$broadcast('filterAction');
+                    });
+                }
+
                 scope.render = function (data) {
                     if (!data || data.length === 0) {
                         return;
                     }
-
+//                    var colors = ['#FF6600', '#FCD202', '#B0DE09', '#0D8ECF', '#2A0CD0', '#CD0D74', '#CC0000', '#00CC00', '#0000CC', '#DDDDDD', '#999999', '#333333', '#990000'];
+//                    data.forEach(function(d) {
+//                        d.color = colors[Math.floor(Math.random()*colors.length)];
+//                    });
                     chart.dataProvider = data;
                     chart.validateData();
                 };

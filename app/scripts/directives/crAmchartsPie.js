@@ -50,6 +50,9 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                             if (config.loading) {
                                 chart.showLoading();
                             }
+
+                            chart.addListener('clickSlice', onChartItemClick);
+
                         };
                         initChart();
                         scope.render(data);
@@ -57,6 +60,20 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                         return scope.render(data);
                     }
                 }, true);
+
+                function onChartItemClick(event) {
+                    var label = event.dataItem.dataContext.label;
+                    scope.$parent.$apply(function () {
+                        if (!_.contains(scope.selectedItems, label)) {
+                            scope.selectedItems.push(label);
+                        } else {
+                            var index = scope.selectedItems.indexOf(label);
+                            scope.selectedItems.splice(index, 1);
+                        }
+                        scope.$parent.filterData[scope.selected] = scope.selectedItems.slice(0);
+                        $rootScope.$broadcast('filterAction');
+                    });
+                }
 
                 scope.render = function (data) {
                     if (!data || data.length === 0) {

@@ -22,7 +22,36 @@
                      filter-property="companyIds"
                         ></div>
             </div>
-
+            <div>
+                <div cr-amcharts-pie
+                     chart-title="Company Status"
+                     chart-id="companyStatusChartDiv"
+                     data="ComponentData.dataSets.companyStatusData"
+                     selected="statuses"
+                     filter-property="statuses"
+                        ></div>
+            </div>
+            <div>
+                <div cr-amcharts-area
+                     chart-title="Investments"
+                     chart-id="investmentsChartDiv"
+                     data="ComponentData.dataSets.fundingRoundCount"
+                     selected="fundingActivity"
+                     extent="1/2000"
+                     ranges="true"
+                     filter-property="fundingActivity"
+                        ></div>
+            </div>
+            <div>
+                <div cr-amcharts-column
+                     chart-id="totalFundingChartDiv"
+                     chart-title="Funding: Total Funding"
+                     data="ComponentData.dataSets.totalFunding"
+                     selected="ranges"
+                     ranges="true"
+                     filter-property="ranges"
+                        ></div>
+            </div>
             <div>
                 <div cr-d3-map
                      chart-title="Company HQ"
@@ -46,16 +75,6 @@
                         ></div>
             </div>
             <div>
-                <div cr-amcharts-pie
-                     chart-title="Company Status"
-                     chart-id="companyStatusChartDiv"
-                     data="ComponentData.dataSets.companyStatusData"
-                     selected="statuses"
-                     filter-property="statuses"
-                        ></div>
-            </div>
-
-            <div>
                 <div cr-d3-pie
                      chart-title="Company Status"
                      data="ComponentData.dataSets.companyStatusData"
@@ -72,17 +91,7 @@
                      filter-property="roundCodes"
                         ></div>
             </div>
-            <div>
-                <div cr-amcharts-area
-                     chart-title="Investments"
-                     chart-id="investmentsChartDiv"
-                     data="ComponentData.dataSets.fundingRoundCount"
-                     selected="fundingActivity"
-                     extent="1/2000"
-                     ranges="true"
-                     filter-property="fundingActivity"
-                        ></div>
-            </div>
+
             <div>
                 <div cr-d3-area
                      chart-title="Investments"
@@ -91,16 +100,6 @@
                      extent="1/2000"
                      ranges="true"
                      filter-property="fundingActivity"
-                        ></div>
-            </div>
-            <div>
-                <div cr-amcharts-column
-                     chart-id="todalFundingChartDiv"
-                     chart-title="Funding: Total Funding"
-                     data="ComponentData.dataSets.totalFunding"
-                     selected="ranges"
-                     ranges="true"
-                     filter-property="ranges"
                         ></div>
             </div>
             <div>
