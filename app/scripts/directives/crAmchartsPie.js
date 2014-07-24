@@ -44,7 +44,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                             chart.depth3D = 10;
                             chart.angle = 15;
 
-                            element.append('<div style="min-width: 310px; height: 350px; margin: 0 auto" id="' + scope.chartId + '"></div>');
+                            element.append('<div style="min-width: 310px; height: 325px; margin: 0 auto" id="' + scope.chartId + '"></div>');
                             chart.write(scope.chartId);
 
                             if (config.loading) {
