@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$rootScope',
+angular.module('crunchinatorApp.directives').directive('crAmchartsBar', ['$rootScope',
     function ($rootScope) {
         return {
             restrict: 'EA',
@@ -24,10 +24,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                 scope.format = scope.format || '%m/%Y';
 
                 var chart;
-                var formatDate = d3.time.format(scope.format);
-                var parseDate = formatDate.parse;
-                var full_extent = [parseDate(scope.extent), new Date()];
-                var initial_extent = full_extent;
 
                 window.onresize = function () {
                     scope.$apply();
@@ -45,23 +41,37 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                             chart = new AmCharts.AmSerialChart();
                             chart.pathToImages = 'vendor/amcharts/images/';
                             chart.dataProvider = [];
-                            chart.categoryField = 'parsed_date';
-                            var categoryAxis = chart.categoryAxis;
-                            categoryAxis.parseDates = true;
-                            categoryAxis.minPeriod = 'mm';
-                            chart.chartScrollbar = {};
+                            chart.categoryField = 'label';
+                            chart.depth3D = 10;
+                            chart.angle = 25;
+                            chart.startDuration = 2;
+                            chart.rotate = true;
+
                             var chartCursor = new AmCharts.ChartCursor();
                             chartCursor.categoryBalloonEnabled = true;
-                            chartCursor.categoryBalloonDateFormat = 'JJ:NN, DD MMMM YYYY';
-                            chartCursor.cursorAlpha = 1.0;
-                            chartCursor.cursorPosition = 'mouse';
+                            chartCursor.cursorAlpha = 0.0;
                             chartCursor.zoomable = true;
                             chart.addChartCursor(chartCursor);
+
                             var graph = new AmCharts.AmGraph();
-                            graph.valueField = 'count';
-                            graph.type = 'smoothedLine';
-                            graph.fillAlphas = 0.8;
+                            graph.id = 'graph-' + scope.chartId;
+                            graph.valueField = 'end';
+                            graph.type = 'column';
+                            graph.fillAlphas = 1;
+                            graph.lineAlphas = 0.1;
+                            graph.colorField = 'color';
+                            graph.balloonText = '[[category]]: <b>[[value]]</b>';
                             chart.addGraph(graph);
+
+                            var chartScrollbar = new AmCharts.ChartScrollbar();
+                            chartScrollbar.graph = graph;
+                            chartScrollbar.scrollbarHeight = 30;
+                            chart.addChartScrollbar(chartScrollbar);
+
+                            var categoryAxis = chart.categoryAxis;
+                            categoryAxis.position = 'left';
+                            categoryAxis.gridPosition = 'start';
+                            categoryAxis.fillAlpha = 0.05;
 
                             element.append('<div style="min-width: 310px; height: 325px; margin: 0 auto" id="' + scope.chartId + '"></div>');
                             chart.write(scope.chartId);
@@ -71,7 +81,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                             }
 
                             chart.addListener('clickGraphItem', onChartItemClick);
-                            chart.addListener("zoomed", onChartZoom);
                         };
                         initChart();
                         scope.render(data);
@@ -81,7 +90,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                 }, true);
 
                 function onChartItemClick(event) {
-                    var label = event.dataItem.dataContext.label;
+                    var label = event.item.dataContext.label;
                     scope.$parent.$apply(function () {
                         if (!_.contains(scope.selectedItems, label)) {
                             scope.selectedItems.push(label);
@@ -94,37 +103,10 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                     });
                 }
 
-                function onChartZoom(event) {
-                    var startIndex = event.startIndex;
-                    var endIndex = event.startIndex;
-                    var startDate = event.startDate;
-                    var endDate = event.endDate;
-                    var extent = [startDate, endDate];
-                    if (!_.isEqual(extent, lastExtent)) {
-                        if (!_.isEqual(extent, full_extent)) {
-                            scope.selectedItems = [extent[0], extent[1]];
-                        } else {
-                            scope.selectedItems = [];
-                        }
-
-                        scope.$parent.$apply(function () {
-                            scope.$parent.filterData[scope.selected] = scope.selectedItems;
-                            $rootScope.$broadcast('filterAction');
-                        });
-                    }
-                    lastExtent = extent;
-                }
-
-                var lastExtent = initial_extent;
-
                 scope.render = function (data) {
                     if (!data || data.length === 0) {
                         return;
                     }
-                    data.forEach(function(d) {
-                        d.parsed_date = parseDate(d.date);
-                    });
-                    data = _.sortBy(data, function(d){ return d.parsed_date; });
                     chart.dataProvider = data;
                     chart.validateData();
                 };

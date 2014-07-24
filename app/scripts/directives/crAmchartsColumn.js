@@ -67,9 +67,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsColumn', ['$ro
                             chartScrollbar.scrollbarHeight = 30;
                             chart.addChartScrollbar(chartScrollbar);
 
-                            var categoryAxis = chart.categoryAxis;
-                            categoryAxis.position = 'top';
-
                             element.append('<div style="min-width: 310px; height: 325px; margin: 0 auto" id="' + scope.chartId + '"></div>');
                             chart.write(scope.chartId);
 

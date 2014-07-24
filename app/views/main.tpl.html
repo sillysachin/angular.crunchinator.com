@@ -23,6 +23,38 @@
                         ></div>
             </div>
             <div>
+                <div cr-list-select
+                     chart-title="Categories"
+                     items="ComponentData.dataSets.categoryListData"
+                     selected="categoryIds"
+                     total="categories.count()"
+                     count="true"
+                     filter-property="categoryIds"
+                        ></div>
+            </div>
+            <div>
+                <div cr-list-select
+                     class="special"
+                     chart-title="Investors"
+                     items="ComponentData.dataSets.investorListData"
+                     selected="investorIds"
+                     total="investors.count()"
+                     count="true"
+                     link="true"
+                     show-search="true"
+                     filter-property="investorIds"
+                        ></div>
+            </div>
+            <div>
+                <div cr-list-select
+                     chart-title="Funding: Round Name"
+                     items="ComponentData.dataSets.roundCodeListData"
+                     selected="roundCodes"
+                     total="fundingRounds.fundingSeries.length"
+                     filter-property="roundCodes"
+                        ></div>
+            </div>
+            <div>
                 <div cr-amcharts-pie
                      chart-title="Company Status"
                      chart-id="companyStatusChartDiv"
@@ -60,91 +92,30 @@
                      filter-property="states"
                         ></div>
             </div>
-
             <div>
-                <div cr-list-select
-                     class="special"
-                     chart-title="Investors"
-                     items="ComponentData.dataSets.investorListData"
-                     selected="investorIds"
-                     total="investors.count()"
-                     count="true"
-                     link="true"
-                     show-search="true"
-                     filter-property="investorIds"
-                        ></div>
-            </div>
-            <div>
-                <div cr-d3-pie
-                     chart-title="Company Status"
-                     data="ComponentData.dataSets.companyStatusData"
-                     selected="statuses"
-                     filter-property="statuses"
-                        ></div>
-            </div>
-            <div>
-                <div cr-list-select
-                     chart-title="Funding: Round Name"
-                     items="ComponentData.dataSets.roundCodeListData"
-                     selected="roundCodes"
-                     total="fundingRounds.fundingSeries.length"
-                     filter-property="roundCodes"
-                        ></div>
-            </div>
-
-            <div>
-                <div cr-d3-area
-                     chart-title="Investments"
-                     data="ComponentData.dataSets.fundingRoundCount"
-                     selected="fundingActivity"
-                     extent="1/2000"
-                     ranges="true"
-                     filter-property="fundingActivity"
-                        ></div>
-            </div>
-            <div>
-                <div cr-d3-bars
-                     chart-title="Funding: Total Funding"
-                     data="ComponentData.dataSets.totalFunding"
-                     selected="ranges"
-                     ranges="true"
-                     filter-property="ranges"
-                        ></div>
-            </div>
-            <div>
-                <div cr-d3-bars
+                <div cr-amcharts-bar
                      chart-title="Funding: Any Round"
+                     chart-id="anyRoundChartDiv"
                      data="ComponentData.dataSets.fundingPerRound"
                      selected="roundRanges"
                      ranges="true"
                      filter-property="roundRanges"
                         ></div>
             </div>
-
             <div>
-                <div cr-d3-bars
+                <div cr-amcharts-bar
                      chart-title="Funding: Latest Round"
+                     chart-id="latestRoundChartDiv"
                      data="ComponentData.dataSets.mostRecentFundingRound"
                      selected="mostRecentRoundRanges"
                      ranges="true"
                      filter-property="mostRecentRoundRanges"
                         ></div>
             </div>
-
             <div>
-                <div cr-list-select
-                     chart-title="Categories"
-                     items="ComponentData.dataSets.categoryListData"
-                     selected="categoryIds"
-                     total="categories.count()"
-                     count="true"
-                     filter-property="categoryIds"
-                        ></div>
-            </div>
-
-            <div>
-                <div cr-d3-area
+                <div cr-amcharts-area
                      chart-title="Acquisition Date"
+                     chart-id="acquisitionDateChartDiv"
                      data="ComponentData.dataSets.acquiredOnCount"
                      selected="acquiredDate"
                      extent="1/2006"
@@ -152,20 +123,20 @@
                      filter-property="acquiredDate"
                         ></div>
             </div>
-
             <div>
-                <div cr-d3-bars
+                <div cr-amcharts-bar
                      chart-title="Acquisition Price"
+                     chart-id="acquisitionPriceChartDiv"
                      data="ComponentData.dataSets.acquiredValueCount"
                      selected="acquiredValueRange"
                      ranges="true"
                      filter-property="acquiredValueRange"
                         ></div>
             </div>
-
             <div>
-                <div cr-d3-area
+                <div cr-amcharts-area
                      chart-title="Founding Date"
+                     chart-id="fundingDatePriceChartDiv"
                      data="ComponentData.dataSets.foundedOnCount"
                      selected="foundedDate"
                      extent="1992"
@@ -174,10 +145,10 @@
                      filter-property="foundedDate"
                         ></div>
             </div>
-
             <div>
-                <div cr-d3-area
+                <div cr-amcharts-area
                      chart-title="IPO Date"
+                     chart-id="ipoDatePriceChartDiv"
                      data="ComponentData.dataSets.ipoDateData"
                      selected="ipoDateRange"
                      extent="1992"
@@ -186,10 +157,10 @@
                      filter-property="ipoDateRange"
                         ></div>
             </div>
-
             <div>
-                <div cr-d3-bars
+                <div cr-amcharts-bar
                      chart-title="IPO Raise"
+                     chart-id="ipoRaiseChartDiv"
                      data="ComponentData.dataSets.ipoValueData"
                      selected="ipoValueRange"
                      ranges="true"
