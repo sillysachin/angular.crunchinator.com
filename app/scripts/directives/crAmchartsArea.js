@@ -70,8 +70,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                                 chart.showLoading();
                             }
 
-                            chart.addListener('clickGraphItem', onChartItemClick);
-                            chart.addListener("zoomed", onChartZoom);
+                            chart.addListener('zoomed', onChartZoom);
                         };
                         initChart();
                         scope.render(data);
@@ -79,20 +78,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                         return scope.render(data);
                     }
                 }, true);
-
-                function onChartItemClick(event) {
-                    var label = event.dataItem.dataContext.label;
-                    scope.$parent.$apply(function () {
-                        if (!_.contains(scope.selectedItems, label)) {
-                            scope.selectedItems.push(label);
-                        } else {
-                            var index = scope.selectedItems.indexOf(label);
-                            scope.selectedItems.splice(index, 1);
-                        }
-                        scope.$parent.filterData[scope.selected] = scope.selectedItems.slice(0);
-                        $rootScope.$broadcast('filterAction');
-                    });
-                }
 
                 function onChartZoom(event) {
                     var startIndex = event.startIndex;
