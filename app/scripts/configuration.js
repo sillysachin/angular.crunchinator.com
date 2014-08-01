@@ -1,6 +1,6 @@
 angular.module("configuration", [])
 
-.constant("ENV", "production")
+.constant("ENV", "development")
 
 .constant("API_VERSION", "")
 
