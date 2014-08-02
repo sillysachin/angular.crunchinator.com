@@ -8,7 +8,7 @@ angular.module('crunchinatorApp.models').service('Customer', function(Model, API
      * @this {Customer}
      */
     var Customer = function() {
-        this.url = API_BASE_URL + '/categories.json';
+        this.url = API_BASE_URL + '/customers.json';
     };
 
     Customer.prototype = Object.create(Model);

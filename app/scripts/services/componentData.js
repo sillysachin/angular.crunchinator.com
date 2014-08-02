@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('crunchinatorApp.services').service('ComponentData', function(Company, Investor, Category, FundingRound, ToolBox) {
+angular.module('crunchinatorApp.services').service('ComponentData', function(Company, Investor, Category, FundingRound, ToolBox, ServiceUsage, Customer) {
     /**
      * Collection of data used as datasources for dashboard widgets (list-select, bar-charts, area-charts, etc).
      */
@@ -12,6 +12,7 @@ angular.module('crunchinatorApp.services').service('ComponentData', function(Com
     this.updateDataSets = function() {
         var data = this.dataSets;
         //Run each data function
+        data.ageGroupListData = this.ageGroupListData(ServiceUsage.dataForAgeGroup, ServiceUsage.dataForAgeGroup);
         data.roundCodeListData = this.roundCodeListData(FundingRound.dataForRoundName, FundingRound.roundHash);
         data.categoryListData = this.categoryListData(Category.dataForCategoryList, Company.dataForCategoriesList);
         data.investorListData = this.investorListData(Investor.dataForInvestorsList, Company.dataForInvestorsList);

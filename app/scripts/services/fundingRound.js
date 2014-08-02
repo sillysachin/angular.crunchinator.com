@@ -151,7 +151,7 @@ angular.module('crunchinatorApp.models').service('FundingRound', function(Model,
                     return (_.contains(codes, round_code));
                 });
             }
-        },
+        }
     };
 
     /**

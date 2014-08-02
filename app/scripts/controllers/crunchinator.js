@@ -4,7 +4,7 @@ angular.module('crunchinatorApp.controllers')
     .controller('CrunchinatorCtrl', [
         '$scope', '$rootScope', '$location', '$q', 'Company', 'Category',
         'Investor', 'FundingRound', 'ComponentData',
-        function CrunchinatorCtrl($scope, $rootScope, $location, $q, Company, Category, Investor, FundingRound, ComponentData) {
+        function CrunchinatorCtrl($scope, $rootScope, $location, $q, Company, Category, Investor, FundingRound, ComponentData, ServiceUsage, Customer) {
             $scope.shouldScroll = false;
 
             ComponentData.updateDataSets();
@@ -25,7 +25,8 @@ angular.module('crunchinatorApp.controllers')
                 ipoValueRange: [],
                 ipoDateRange: [],
                 acquiredValueRange: [],
-                roundCodes: []
+                roundCodes: [],
+                ageGroups: []
             };
 
             $scope.selectedRanges = [];
@@ -35,6 +36,8 @@ angular.module('crunchinatorApp.controllers')
             $scope.investors = Investor;
             $scope.categories = Category;
             $scope.fundingRounds = FundingRound;
+            $scope.serviceUsages = ServiceUsage;
+            $scope.customers = Customer;
 
             //Fetch the data for each model, then set up its dimensions and run its filters.
             var modelCount = 0;

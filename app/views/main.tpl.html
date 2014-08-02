@@ -55,6 +55,15 @@
                         ></div>
             </div>
             <div>
+                <div cr-list-select
+                     chart-title="Service Usage: Age Group"
+                     items="ComponentData.dataSets.ageGroupListData"
+                     selected="ageGroups"
+                     total="serviceUsages.ageGroupTypes.length"
+                     filter-property="ageGroups"
+                        ></div>
+            </div>
+            <div>
                 <div cr-amcharts-pie
                      chart-title="Company Status"
                      chart-id="companyStatusChartDiv"

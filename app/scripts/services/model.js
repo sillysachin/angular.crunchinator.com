@@ -199,6 +199,25 @@ angular.module('crunchinatorApp.models').service('Model', function($rootScope, $
     };
 
     /**
+     * Checks to see if a ServiceUsage passes filtering.
+     *
+     * @param {object} a ServiceUsage to check filters against.
+     * @param {object} current filter parameters.
+     * @returns {boolean} whether a ServiceUsage passes the current filter state.
+     */
+    Model.prototype.ageGroupPassesFilters = function(usage, filterData) {
+        var self = this;
+        var parse = this.format.parse;
+
+        //byAllFundingRoundsCodes
+        if(filterData.ageGroups.length > 0) {
+            if(!_.include(filterData.ageGroups, usage.age_group)) { return false; }
+        }
+
+        return true;
+    };
+
+    /**
     * Returns whether any entry of an array of items falls within a number range.
     *
     * @param {array} list of numbers to check with

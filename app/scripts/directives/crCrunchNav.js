@@ -122,7 +122,8 @@ angular.module('crunchinatorApp.directives').directive('crCrunchNav', ['$rootSco
                     ipoValueRange: 'IPO Raise',
                     ipoDateRange: 'IPO Date',
                     acquiredValueRange: 'Acquisition Price',
-                    roundCodes: 'Round Name'
+                    roundCodes: 'Round Name',
+                    ageGroups: 'Age Group'
                 };
             }
         };
