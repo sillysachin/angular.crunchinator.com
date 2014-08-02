@@ -137,6 +137,41 @@ var randomDate = function(start, end) {
     };
 
     /**
+     * Generates a ServiceUsage with random attributes.
+     *
+     * @param {number} an ID for the generated ServiceUsage.
+     * @return {object} ServiceUsage with randomly generated property values.
+     */
+    var randomServiceUsage = function(id) {
+        id = id || 0;
+        var ageGroups = ['12-18', '18-30', '30-45', '45-60'];
+        var locations = ['Athens', 'Austin', 'Berline', 'Boulder', 'Copenhagen', 'Dallas', 'Detroit', 'Dublin', 'Vienna'];
+
+        return {
+            id: id,
+            customer_id: 0,
+            average_daily_voice_usage: Math.floor(Math.random() * 1e8),
+            average_daily_data_usage: Math.floor(Math.random() * 1e8),
+            age_group: ageGroups[exponential_distribution(0, ageGroups.length)],
+            location: locations[exponential_distribution(0, locations.length)]
+        };
+    };
+
+    /**
+     * Generate an Customer object with random, usable attributes.
+     *
+     * @param {number} [id] Not required. Define an ID for the returned customer.
+     * @return {object} An customer with randomly generated data values.
+     */
+    var randomCustomer = function(id) {
+        var gender = Math.random() < 0.5 ? 'male' : 'female';
+        id = id || 0;
+        return {
+            id: id,
+            gender: gender
+        };
+    };
+    /**
      * Generate a list of data based on a supplied function
      *
      * @param {number} [count] How many items should be returned in the data list
@@ -188,12 +223,16 @@ var randomDate = function(start, end) {
         var investors = generateDataList(2500, randomInvestor);
         var companies = generateDataList(4000, randomCompany);
         var rounds = generateDataList(7500, randomFundingRound);
+        var customers = generateDataList(7500, randomCustomers);
+        var usages = generateDataList(7500, randomUsage);
         linkGeneratedLists(companies, investors, categories, rounds);
 
         ng.module('crunchinatorApp')
         .config(['$provide', function($provide) {
             $provide.decorator('$httpBackend', ng.mock.e2e.$httpBackendDecorator);
         }]).run(['$httpBackend', function($httpBackend) {
+            $httpBackend.when('GET', '/customer.json').respond({ customers: customers });
+            $httpBackend.when('GET', '/serviceUsage.json').respond({ service_usages: usages });
             $httpBackend.when('GET', '/companies.json').respond({ companies: companies });
             $httpBackend.when('GET', '/categories.json').respond({ categories: categories });
             $httpBackend.when('GET', '/investors.json').respond({investors: investors });
@@ -211,10 +250,10 @@ var randomDate = function(start, end) {
         setupStubbedBackend();
         break;
     case 'staging':
-        base_url = 'http://staging.crunchinator.com/api/' + api_version;
+        base_url = 'http://localhost/data/' + api_version;
         break;
     case 'production':
-        base_url = 'http://crunchinator.com/api/' + api_version;
+        base_url = 'http://localhost/data/' + api_version;
         break;
     }
 
