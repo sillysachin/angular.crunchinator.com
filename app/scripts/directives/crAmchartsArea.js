@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$rootScope',
-    function ($rootScope) {
+angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$rootScope','$timeout',
+    function ($rootScope, $timeout) {
         return {
             restrict: 'EA',
             replace: true,
@@ -80,8 +80,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                 }, true);
 
                 function onChartZoom(event) {
-                    var startIndex = event.startIndex;
-                    var endIndex = event.startIndex;
                     var startDate = event.startDate;
                     var endDate = event.endDate;
                     var extent = [startDate, endDate];
@@ -91,11 +89,13 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                         } else {
                             scope.selectedItems = [];
                         }
+                        $timeout(function () {
+                            scope.$parent.$apply(function () {
+                                scope.$parent.filterData[scope.selected] = scope.selectedItems;
+                                $rootScope.$broadcast('filterAction');
+                            });
+                        })
 
-                        scope.$parent.$apply(function () {
-                            scope.$parent.filterData[scope.selected] = scope.selectedItems;
-                            $rootScope.$broadcast('filterAction');
-                        });
                     }
                     lastExtent = extent;
                 }
@@ -106,10 +106,12 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsArea', ['$root
                     if (!data || data.length === 0) {
                         return;
                     }
-                    data.forEach(function(d) {
+                    data.forEach(function (d) {
                         d.parsed_date = parseDate(d.date);
                     });
-                    data = _.sortBy(data, function(d){ return d.parsed_date; });
+                    data = _.sortBy(data, function (d) {
+                        return d.parsed_date;
+                    });
                     chart.dataProvider = data;
                     chart.validateData();
                 };
