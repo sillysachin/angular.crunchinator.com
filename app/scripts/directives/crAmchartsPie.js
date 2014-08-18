@@ -34,7 +34,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsPie', ['$rootS
                     if (!chart && ( data && data.length > 0)) {
                         var initChart = function () {
                             var config = scope.config || {};
-                            chart = new AmCharts.AmPieChart(AmCharts.themes.light);
+                            chart = new AmCharts.AmPieChart(AmCharts.themes.dark);
                             chart.dataProvider = [];
                             chart.valueField = 'count';
                             chart.titleField = 'label';

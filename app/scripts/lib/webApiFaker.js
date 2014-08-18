@@ -126,11 +126,13 @@ var randomDate = function(start, end) {
      */
     var randomFundingRound = function(id) {
         id = id || 0;
+        var colors = ['#FF6600', '#FCD202', '#B0DE09', '#0D8ECF', '#2A0CD0', '#CD0D74', '#CC0000', '#00CC00', '#0000CC', '#DDDDDD', '#999999', '#333333', '#990000'];
         return {
             id: id,
             company_id: 0,
             round_code: 'Unattributed',
             raised_amount: Math.floor(Math.random() * 1e8),
+            color: colors[exponential_distribution(0, colors.length)],
             funded_on: d3.time.format('%x')(randomDate(new Date(2000, 1, 1), new Date())),
             investor_ids: []
         };
@@ -184,10 +186,10 @@ var randomDate = function(start, end) {
      * Initiate and respond with fake backend data instead of querying an actual API
      */
     var setupStubbedBackend = function() {
-        var categories = generateDataList(10, randomCategory);
-        var investors = generateDataList(2500, randomInvestor);
-        var companies = generateDataList(4000, randomCompany);
-        var rounds = generateDataList(7500, randomFundingRound);
+        var categories = generateDataList(25, randomCategory);
+        var investors = generateDataList(10, randomInvestor);
+        var companies = generateDataList(25, randomCompany);
+        var rounds = generateDataList(50, randomFundingRound);
         linkGeneratedLists(companies, investors, categories, rounds);
 
         ng.module('crunchinatorApp')

@@ -52,7 +52,7 @@ function generateChartData() {
     }
 }
 
-var chart = AmCharts.makeChart('stockChartDiv', {
+var chart = AmCharts.makeChart('stockChartContainer', {
     type: 'stock',
     theme: 'dark',
     pathToImages: 'http://www.amcharts.com/lib/3/images/',

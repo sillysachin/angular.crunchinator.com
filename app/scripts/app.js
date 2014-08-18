@@ -10,7 +10,7 @@ angular.module('crunchinatorApp.controllers', [
     'crunchinatorApp.models',
     'crunchinatorApp.directives',
     'crunchinatorApp.services',
-    'infinite-scroll',
+    'infinite-scroll'
 ]).config(function config($stateProvider) {
     $stateProvider.state('crunchinator', {
         url: '/crunchinator',

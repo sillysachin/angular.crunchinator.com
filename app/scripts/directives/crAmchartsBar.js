@@ -38,7 +38,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsBar', ['$rootS
                     if (!chart && ( data && data.length > 0)) {
                         var initChart = function () {
                             var config = scope.config || {};
-                            chart = new AmCharts.AmSerialChart();
+                            chart = new AmCharts.AmSerialChart(AmCharts.themes.dark);
                             chart.pathToImages = 'vendor/amcharts/images/';
                             chart.dataProvider = [];
                             chart.categoryField = 'label';

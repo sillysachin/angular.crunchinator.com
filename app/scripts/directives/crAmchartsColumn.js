@@ -38,7 +38,7 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsColumn', ['$ro
                     if (!chart && ( data && data.length > 0)) {
                         var initChart = function () {
                             var config = scope.config || {};
-                            chart = new AmCharts.AmSerialChart();
+                            chart = new AmCharts.AmSerialChart(AmCharts.themes.dark);
                             chart.pathToImages = 'vendor/amcharts/images/';
                             chart.dataProvider = [];
                             chart.categoryField = 'label';
@@ -101,10 +101,6 @@ angular.module('crunchinatorApp.directives').directive('crAmchartsColumn', ['$ro
                     if (!data || data.length === 0) {
                         return;
                     }
-//                    var colors = ['#FF6600', '#FCD202', '#B0DE09', '#0D8ECF', '#2A0CD0', '#CD0D74', '#CC0000', '#00CC00', '#0000CC', '#DDDDDD', '#999999', '#333333', '#990000'];
-//                    data.forEach(function(d) {
-//                        d.color = colors[Math.floor(Math.random()*colors.length)];
-//                    });
                     chart.dataProvider = data;
                     chart.validateData();
                 };
